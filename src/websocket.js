@@ -35,9 +35,21 @@ async function getRecentStories() {
 }
 
 function initializeWebSocket(server) {
-  wss = new WebSocket.Server({ server });
+  // Check if we're in a Vercel environment
+  const isVercel = process.env.VERCEL === '1';
+  
+  if (isVercel) {
+    // For Vercel, use their WebSocket URL scheme
+    wss = new WebSocket.Server({
+      server,
+      path: '/ws'
+    });
+  } else {
+    // For local development
+    wss = new WebSocket.Server({ server });
+  }
 
-  wss.on('connection', async (ws) => {
+  wss.on('connection', async (ws, req) => {
     console.log('Client connected');
     
     const recentStories = await getRecentStories();

@@ -133,7 +133,12 @@
     <div id="stories"></div>
 
     <script>
-        const ws = new WebSocket('ws://localhost:3000');
+        const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+        const wsHost = window.location.hostname === 'localhost' 
+            ? 'localhost:3000' 
+            : window.location.host;
+        const wsPath = window.location.hostname === 'localhost' ? '' : '/ws';
+        const ws = new WebSocket(`${wsProtocol}//${wsHost}${wsPath}`);
         const statusDiv = document.getElementById('status');
         const storiesDiv = document.getElementById('stories');
         const recentCountDiv = document.getElementById('recent-count');
