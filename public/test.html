@@ -133,11 +133,7 @@
     <div id="stories"></div>
 
     <script>
-        const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-        const wsHost = window.location.hostname === 'localhost' 
-            ? 'localhost:3000' 
-            : window.location.host;
-        const ws = new WebSocket(`${wsProtocol}//${wsHost}`);
+        const ws = new WebSocket('ws://localhost:3000');
         const statusDiv = document.getElementById('status');
         const storiesDiv = document.getElementById('stories');
         const recentCountDiv = document.getElementById('recent-count');
@@ -172,8 +168,10 @@
                 const { count, stories } = data.data;
                 recentCountDiv.textContent = `Stories in last 5 minutes: ${count}`;
                 
+                // Clear existing stories
                 storiesDiv.innerHTML = '';
                 
+                // Add new stories
                 stories.forEach(story => {
                     const storyElement = document.createElement('div');
                     storyElement.className = 'story';

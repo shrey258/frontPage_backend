@@ -38,8 +38,9 @@ cd frontPage_backend
 npm install
 ```
 
-3. Create a `.env` file in the root directory:
+3. Create a `.env` file in the root directory (copy from `.env.example`):
 ```env
+# Copy from .env.example and fill in your Supabase details
 DATABASE_URL=your_supabase_postgres_connection_string
 PORT=3000
 ```
@@ -48,6 +49,14 @@ PORT=3000
 ```bash
 npm run dev
 ```
+
+## Important Note
+
+⚠️ This project is designed for local development only. Due to WebSocket limitations on free-tier hosting services (like Render, Heroku, etc.), deployment is not supported on free tiers. The application provides real-time updates through WebSocket connections which require persistent connections, a feature typically not available in free hosting plans.
+
+To run this project:
+1. Clone and run it locally
+2. Use a paid hosting service that supports WebSocket connections
 
 ## Project Structure
 
@@ -62,6 +71,7 @@ frontPage_backend/
 ├── public/
 │   └── test.html         # Frontend interface
 ├── .env                   # Environment variables
+├── .env.example          # Example environment variables
 └── package.json
 ```
 
