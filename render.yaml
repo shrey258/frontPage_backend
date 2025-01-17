@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: hacker-news-feed
+    env: node
+    buildCommand: npm install
+    startCommand: node src/server.js
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+    plan: free
